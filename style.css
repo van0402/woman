@@ -27,11 +27,15 @@ body {
   inset: 0;
   z-index: 2;
   opacity: 1;
-  transition: opacity 1.2s ease;
+  will-change: opacity;
+  transition: opacity 1.4s ease-in-out;
 }
 body.show-gallery .hero {
   opacity: 0;
   pointer-events: none;
+}
+body.show-gallery .hero * {
+  animation-play-state: paused !important;
 }
 
 .night {
@@ -1018,7 +1022,8 @@ body.show-gallery .hero {
   background-color: var(--dark-color);
   opacity: 0;
   pointer-events: none;
-  transition: opacity 1.2s ease;
+  will-change: opacity;
+  transition: opacity 1.4s ease-in-out;
 }
 body.show-gallery .gallery {
   opacity: 1;
