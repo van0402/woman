@@ -18,12 +18,20 @@ body {
   display: flex;
   align-items: flex-end;
   justify-content: center;
-  min-height: 100vh;
+  height: 100vh;
   background-color: var(--dark-color);
   overflow: hidden;
   perspective: 1000px;
   padding: 50px 0px;
-  position: relative;
+  position: fixed;
+  inset: 0;
+  z-index: 2;
+  opacity: 1;
+  transition: opacity 1.2s ease;
+}
+body.show-gallery .hero {
+  opacity: 0;
+  pointer-events: none;
 }
 
 .night {
@@ -998,23 +1006,40 @@ body {
 }
 
 .gallery {
-  position: relative;
+  position: fixed;
+  inset: 0;
   z-index: 1;
-  padding: 10vmin 6vmin 14vmin;
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4vmin;
+  padding: 6vmin;
+  background-color: var(--dark-color);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 1.2s ease;
 }
-.gallery__grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 3vmin;
-  max-width: 900px;
-  margin: 0 auto;
+body.show-gallery .gallery {
+  opacity: 1;
+  pointer-events: auto;
+}
+.gallery__stack {
+  position: relative;
+  width: min(60vmin, 420px);
+  aspect-ratio: 1;
+  border-radius: 1.5vmin;
+  overflow: hidden;
+  box-shadow: 0 1vmin 3vmin rgba(0, 0, 0, 0.5);
 }
 .gallery__item {
-  aspect-ratio: 1;
-  overflow: hidden;
-  border-radius: 1.5vmin;
-  box-shadow: 0 1vmin 3vmin rgba(0, 0, 0, 0.5);
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 1.4s ease;
+}
+.gallery__item.is-active {
+  opacity: 1;
 }
 .gallery__item img {
   width: 100%;
@@ -1022,11 +1047,11 @@ body {
   object-fit: cover;
 }
 .gallery__wish {
-  margin: 6vmin auto 0;
   max-width: 640px;
   color: #fff;
   font-size: clamp(16px, 2.4vmin, 22px);
   line-height: 1.7;
+  text-align: center;
 }
 
 /*# sourceMappingURL=style.css.map */
